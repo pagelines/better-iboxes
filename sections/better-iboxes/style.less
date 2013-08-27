@@ -1,0 +1,85 @@
+.better_iboxes{
+	text-align: center;
+	.better_iboxes_text h4{
+		margin-bottom: 5px;
+	}
+	.better_iboxes_desc{
+
+		margin-bottom: 1em;
+		.better_iboxes_link{
+			display: block;
+			margin-top: .5em;
+			i{
+				.transition(all 0.2s ease-in-out);
+
+			}
+			a:hover i{
+				margin-left: 6px;
+			}
+		}
+	}
+
+
+
+	.better_iboxes_media{
+		text-align: center;
+		margin-right: 15px;
+
+		.better_iboxes_icon-border{
+			margin-bottom: @baseLineHeight/2;
+			display: inline-block;
+			text-align: center;
+			overflow: hidden;
+			&.media-type-image {
+				.background-size(cover);
+				display: block;
+				margin-right: auto;
+				margin-left: auto;
+				max-width: 100%;
+			}
+			&.media-type-icon {
+				&:before {
+					content: '';
+					display: inline-block;
+					height: 100%;
+					vertical-align: middle;
+					margin-right: -0.25em; /* Adjusts for spacing */
+				}
+
+				border: 1px solid transparent;
+				.transition(all 0.2s ease-in-out);
+				i{
+					display: inline-block;
+					display: inline-block;
+					vertical-align: middle;
+				}
+				&.hover {
+					&:hover{
+						background: @linkColorHover;
+						i{
+							color:@baseColor;
+						}
+					}
+				}
+			}
+		}
+
+	}
+	&.top-aligned{
+		.better_iboxes_media{
+			margin-right: auto;
+			margin-left: auto;
+			.media-type-image {
+			}
+		}
+	}
+	&.left-aligned{
+		text-align: left;
+		.better_iboxes_media{
+			float: left;
+		}
+	}
+}
+
+
+
