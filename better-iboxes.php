@@ -2,8 +2,8 @@
 /*
 	Plugin Name: Better iBoxes
 	Demo: http://betteriboxes.ahansson.com
-	Description: iBoxes, how they should have been.
-	Version: 1.0
+	Description: An better way to create and configure several iBoxes at once. It is all about options!
+	Version: 1.1
 	Author: Aleksander Hansson
 	Author URI: http://ahansson.com
 */
@@ -21,7 +21,7 @@ $license_key = trim( get_option( 'ah_better_iboxes_license_key' ) );
 
 // setup the updater
 $edd_updater = new EDD_SL_Plugin_Updater( AH_BETTER_IBOXES_STORE_URL, __FILE__, array(
-		'version' 	=> '1.0', 				// current version number
+		'version' 	=> '1.1', 				// current version number
 		'license' 	=> $license_key, 		// license key (used get_option above to retrieve from DB)
 		'item_name' => AH_BETTER_IBOXES_NAME, 		// name of this plugin
 		'author' 	=> 'Aleksander Hansson' // author of this plugin
@@ -39,7 +39,7 @@ function ah_better_iboxes_license_page() {
 	$status 	= get_option( 'ah_better_iboxes_license_status' );
 	?>
 	<div class="wrap">
-		<h2><?php _e('Better iBoxes License Options'); ?></h2>
+		<h2><?php echo 'Better iBoxes License Options'; ?></h2>
 		<form method="post" action="options.php">
 
 			<?php settings_fields('ah_better_iboxes_license'); ?>
@@ -48,11 +48,11 @@ function ah_better_iboxes_license_page() {
 				<tbody>
 					<tr valign="top">
 						<th scope="row" valign="top">
-							<?php _e('License Key'); ?>
+							<?php echo 'License Key'; ?>
 						</th>
 						<td>
 							<input id="ah_better_iboxes_license_key" name="ah_better_iboxes_license_key" type="text" class="regular-text" value="<?php esc_attr_e( $license ); ?>" />
-							<label class="description" for="ah_better_iboxes_license_key"><?php _e('Enter your license key'); ?></label>
+							<label class="description" for="ah_better_iboxes_license_key"><?php echo 'Enter your license key'; ?></label>
 						</td>
 					</tr>
 					<?php if( false !== $license ) { ?>
@@ -64,10 +64,10 @@ function ah_better_iboxes_license_page() {
 								<?php if( $status !== false && $status == 'valid' ) { ?>
 									<span style="color:green;"><?php _e('active'); ?></span>
 									<?php wp_nonce_field( 'ah_better_iboxes_nonce', 'ah_better_iboxes_nonce' ); ?>
-									<input type="submit" class="button-secondary" name="ah_better_iboxes_license_deactivate" value="<?php _e('Deactivate License'); ?>"/>
+									<input type="submit" class="button-secondary" name="ah_better_iboxes_license_deactivate" value="<?php echo 'Deactivate License'; ?>"/>
 								<?php } else {
 									wp_nonce_field( 'ah_better_iboxes_nonce', 'ah_better_iboxes_nonce' ); ?>
-									<input type="submit" class="button-secondary" name="ah_better_iboxes_license_activate" value="<?php _e('Activate License'); ?>"/>
+									<input type="submit" class="button-secondary" name="ah_better_iboxes_license_activate" value="<?php echo 'Activate License'; ?>"/>
 								<?php } ?>
 							</td>
 						</tr>

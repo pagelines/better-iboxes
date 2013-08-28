@@ -52,8 +52,8 @@ class BetterIBoxes extends PageLinesSection {
 					'type' 			=> 'count_select',
 					'count_start'	=> 1,
 					'count_number'	=> 12,
-					'default'		=> '3',
-					'label' 	=> __( 'Number of Columns for Each Box (12 Col Grid)', 'better-iboxes' ),
+					'default'		=> 4,
+					'label' 	=> __( 'Number of iBoxes per row (Default is 4)', 'better-iboxes' ),
 				),
 				array(
 					'key'			=> 'better_iboxes_media',
@@ -104,7 +104,7 @@ class BetterIBoxes extends PageLinesSection {
 				),
 				array(
 					'key'		=> 'better_iboxes_link_'.$i,
-					'label'		=> __( 'Better iBoxes Link (Optional)', 'better-iboxes' ),
+					'label'		=> __( 'Better iBoxes Link (Optional). Remember "http://"', 'better-iboxes' ),
 					'type'		=> 'text'
 				),
 				array(
@@ -117,7 +117,7 @@ class BetterIBoxes extends PageLinesSection {
 			if($media == 'icon'){
 				$opts[] = array(
 					'key'		=> 'better_iboxes_font_size_'.$i,
-					'label'		=> __( 'Better iBoxes Font Size (Default is 40px)', 'better-iboxes' ),
+					'label'		=> __( 'Better iBoxes Icon Size (Default is 40px)', 'better-iboxes' ),
 					'type'		=> 'text'
 				);
 				$opts[] = array(
@@ -174,7 +174,8 @@ class BetterIBoxes extends PageLinesSection {
    function section_template( ) {
 
 		$boxes = ($this->opt('better_iboxes_count')) ? $this->opt('better_iboxes_count') : $this->default_limit;
-		$cols = ($this->opt('better_iboxes_cols')) ? $this->opt('better_iboxes_cols') : 3;
+		$cols_number = ($this->opt('better_iboxes_cols')) ? $this->opt('better_iboxes_cols'): 4;
+		$cols = (12 / $cols_number);
 
 		$media_type = ($this->opt('better_iboxes_media')) ? $this->opt('better_iboxes_media') : 'icon';
 		$media_format = ($this->opt('better_iboxes_format')) ? $this->opt('better_iboxes_format') : 'top';
@@ -230,7 +231,23 @@ class BetterIBoxes extends PageLinesSection {
 
 			}
 
-
+			if ($media_type == 'text') {
+				$iboxes_media = '';
+			} else {
+				$iboxes_media = sprintf(
+					'<div class="better_iboxes_media">
+						<span class="better_iboxes_icon-border %s %s" style="%s %s %s">
+							%s
+						</span>
+					</div>',
+					$media_class,
+					$animations,
+					$media_bg,
+					$border_radius,
+					$dimensions,
+					$media_html
+				);
+			}
 
 			if($width == 0)
 				$output .= '<div class="row fix">';
@@ -240,15 +257,10 @@ class BetterIBoxes extends PageLinesSection {
 			$output .= sprintf(
 				'<div class="span%s better_iboxes %s fix">
 					%s
-						<div class="better_iboxes_media">
-							<span class="better_iboxes_icon-border %s %s" style="%s %s %s">
-								%s
-							</span>
-						</div>
+					%s
 						<div class="better_iboxes_text bd">
 							%s
 							<div class="better_iboxes_desc">
-								%s
 								%s
 							</div>
 						</div>
@@ -258,15 +270,9 @@ class BetterIBoxes extends PageLinesSection {
 				$cols,
 				$format_class,
 				$link_opening,
-				$media_class,
-				$animations,
-				$media_bg,
-				$border_radius,
-				$dimensions,
-				$media_html,
+				$iboxes_media,
 				$title,
 				$text,
-				$text_link,
 				$link_closing
 			);
 
