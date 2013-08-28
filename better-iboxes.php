@@ -6,6 +6,9 @@
 	Version: 1.1
 	Author: Aleksander Hansson
 	Author URI: http://ahansson.com
+	Filter: component
+	v3: true
+	PageLines: true
 */
 
 define( 'AH_BETTER_IBOXES_STORE_URL', 'http://shop.ahansson.com' );
