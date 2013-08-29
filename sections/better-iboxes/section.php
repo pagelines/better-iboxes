@@ -49,9 +49,15 @@ class BetterIBoxes extends PageLinesSection {
 				),
 				array(
 					'key'			=> 'better_iboxes_cols',
-					'type' 			=> 'count_select',
-					'count_start'	=> 1,
-					'count_number'	=> 12,
+					'type' 			=> 'select',
+					'opts'		=> array(
+						1	 	=> array( 'name' => __( '1', 'better-iboxes' ) ),
+						2		=> array( 'name' => __( '2', 'better-iboxes' ) ),
+						3		=> array( 'name' => __( '3', 'better-iboxes' ) ),
+						4		=> array( 'name' => __( '4', 'better-iboxes' ) ),
+						6		=> array( 'name' => __( '6', 'better-iboxes' ) ),
+						12		=> array( 'name' => __( '12', 'better-iboxes' ) )
+					),
 					'default'		=> 4,
 					'label' 	=> __( 'Number of iBoxes per row (Default is 4)', 'better-iboxes' ),
 				),
