@@ -20,11 +20,15 @@ class BetterIBoxes extends PageLinesSection {
 			<script type="text/javascript">
 
 			jQuery(document).ready(function() {
-				var cw = jQuery('.media-type-image').width();
 
-					jQuery('.media-type-image').css({
-					    'height': cw + 'px'
-					});
+				jQuery(window).resize(function(){
+				    // If there are multiple elements with the same class, "main"
+				    jQuery('.media-type-image').each(function() {
+				        jQuery(this).height(jQuery(this).width());
+				    });
+
+				}).resize();
+
 			});
 			</script>
 		<?php
