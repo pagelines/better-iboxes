@@ -166,6 +166,12 @@ class BetterIBoxes extends PageLinesSection {
 				'type'		=> 'text'
 			);
 
+			$opts[] = array(
+				'key'		=> 'better_iboxes_custom_class_'.$i,
+				'label'		=> __( 'iBox '.$i.' custom class', 'better-iboxes' ),
+				'type'		=> 'text'
+			);
+
 
 			$options[] = array(
 				'title' 	=> __( 'Better iBoxes ', 'better-iboxes' ) . $i,
@@ -262,10 +268,10 @@ class BetterIBoxes extends PageLinesSection {
 			if($width == 0)
 				$output .= '<div class="row fix">';
 
-
+			$custom_class = ( $this->opt('better_iboxes_custom_class_'.$i) ) ? $this->opt('better_iboxes_custom_class_'.$i): '';
 
 			$output .= sprintf(
-				'<div class="span%s better_iboxes %s fix">
+				'<div class="%s span%s better_iboxes %s fix">
 					%s
 					%s
 						<div class="better_iboxes_text bd">
@@ -277,6 +283,7 @@ class BetterIBoxes extends PageLinesSection {
 					%s
 				</div>',
 
+				$custom_class,
 				$cols,
 				$format_class,
 				$link_opening,
