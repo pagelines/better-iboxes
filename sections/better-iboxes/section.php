@@ -108,6 +108,26 @@ class BetterIBoxes extends PageLinesSection {
 					'type'		=> 'text'
 				),
 				array(
+					'key'		=> 'title_on_top_'.$i,
+					'label'		=> __( 'Title On Top?', 'better-iboxes' ),
+					'type'		=> 'check',
+					'default'	=> false
+				),
+				array(
+					'key'		=> 'title_type_'.$i,
+					'label'		=> __( 'Better iBoxes Title Type', 'better-iboxes' ),
+					'type' 			=> 'select',
+					'opts'		=> array(
+						'h1'	 	=> array( 'name' => __( 'Heading 1', 'better-iboxes' ) ),
+						'h2'		=> array( 'name' => __( 'Heading 2', 'better-iboxes' ) ),
+						'h3'		=> array( 'name' => __( 'Heading 3', 'better-iboxes' ) ),
+						'h4'		=> array( 'name' => __( 'Heading 4', 'better-iboxes' ) ),
+						'h5'		=> array( 'name' => __( 'Heading 5', 'better-iboxes' ) ),
+						'h6'		=> array( 'name' => __( 'Heading 6', 'better-iboxes' ) )
+					),
+					'default'		=> 'h4',
+				),
+				array(
 					'key'		=> 'better_iboxes_text_'.$i,
 					'label'	=> __( 'Better iBoxes Text', 'better-iboxes' ),
 					'type'	=> 'textarea'
@@ -121,6 +141,28 @@ class BetterIBoxes extends PageLinesSection {
 					'key'		=> 'better_iboxes_border_radius_'.$i,
 					'label'		=> __( 'Better iBoxes Border Radius (Default is 50%) for no border radius type: "none"', 'better-iboxes' ),
 					'type'		=> 'text'
+				),
+				array(
+					'key'			=> 'better_iboxes_animation_'.$i,
+					'label' 		=> __( 'Select Animation', 'better-iboxes' ),
+					'type' 			=> 'select',
+					'opts'		=> array(
+						'pl-appear'			=> array( 'name' => __( 'Appear', 'better-iboxes' ) ),
+						'pla-scale'	 		=> array( 'name' => __( 'Scale', 'better-iboxes' ) ),
+						'pla-fade'			=> array( 'name' => __( 'Fade', 'better-iboxes' ) ),
+						'pla-from-left'		=> array( 'name' => __( 'From Left', 'better-iboxes' ) ),
+						'pla-from-right'	=> array( 'name' => __( 'From Right', 'better-iboxes' ) ),
+						'pla-from-top'		=> array( 'name' => __( 'From Top', 'better-iboxes' ) ),
+						'pla-from-bottom'	=> array( 'name' => __( 'From Bottom', 'better-iboxes' ) )
+					),
+					'help' 			=> __( 'This is a DMS Pro feature. You have to register your site to make animations work. If you want to remove animations, use the checkbox below.', 'better-iboxes' ),
+					'default'		=> 'pl-appear',
+				),
+				array(
+					'type' 			=> 'check',
+					'key'			=> 'better_iboxes_animations_'.$i,
+					'label'			=> 'Remove Animation?',
+					'default'		=> false,
 				),
 			);
 
@@ -154,12 +196,6 @@ class BetterIBoxes extends PageLinesSection {
 					'type'		=> 'image_upload',
 				);
 			}
-			$opts[] = array(
-				'key'		=> 'better_iboxes_animations_'.$i,
-				'label'		=> __( 'Remove iBoxes Animations', 'better-iboxes' ),
-				'type'		=> 'check',
-				'default'	=> true,
-			);
 			$opts[] = array(
 				'key'		=> 'better_iboxes_dimensions_'.$i,
 				'label'		=> __( 'Better iBoxes Dimensions (Default is 90px)', 'better-iboxes' ),
@@ -206,8 +242,10 @@ class BetterIBoxes extends PageLinesSection {
 
 			$text = sprintf('<div data-sync="better_iboxes_text_%s">%s</div>', $i, $text );
 
+			$title_type = (! $this->opt('title_type_'.$i) ) ? 'h4': $this->opt('title_type_'.$i);
+
 			$title = ($this->opt('better_iboxes_title_'.$i)) ? $this->opt('better_iboxes_title_'.$i) : __('Better iBoxes '.$i, 'better-iboxes');
-			$title = sprintf('<h4 data-sync="better_iboxes_title_%s">%s</h4>', $i, $title );
+			$title = sprintf('<%s data-sync="better_iboxes_title_%s">%s</%s>', $title_type, $i, $title, $title_type );
 
 			// LINK
 			$link = $this->opt('better_iboxes_link_'.$i);
@@ -215,7 +253,10 @@ class BetterIBoxes extends PageLinesSection {
 			$link_closing = ($link) ? sprintf('</a>', $link ) : '';
 			$hover = ($this->opt('better_iboxes_hover_'.$i)) ? '' : 'hover';
 			$contrast = ($this->opt('better_iboxes_contrast_'.$i)) ? '' : 'pl-contrast';
-			$animations = ($this->opt('better_iboxes_animations_'.$i)) ? '': 'pl-animation pl-appear';
+
+			if (! $this->opt('better_iboxes_animations_'.$i) ) {
+				$animations = ($this->opt('better_iboxes_animation_'.$i)) ? sprintf('pl-animation %s', $this->opt('better_iboxes_animation_'.$i) ): '';
+			}
 
 			$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
 			$media_class = sprintf('media-type-%s %s %s', $media_type, $hover, $contrast);
@@ -247,6 +288,14 @@ class BetterIBoxes extends PageLinesSection {
 
 			}
 
+			if ( $this->opt('title_on_top_'.$i) ) {
+				$title_top = $title;
+				$title_bottom = '';
+			} else {
+				$title_top = '';
+				$title_bottom = $title;
+			}
+
 			if ($media_type == 'text') {
 				$iboxes_media = '';
 			} else {
@@ -274,6 +323,7 @@ class BetterIBoxes extends PageLinesSection {
 				'<div class="%s span%s better_iboxes %s fix">
 					%s
 					%s
+					%s
 						<div class="better_iboxes_text bd">
 							%s
 							<div class="better_iboxes_desc">
@@ -287,8 +337,9 @@ class BetterIBoxes extends PageLinesSection {
 				$cols,
 				$format_class,
 				$link_opening,
+				$title_top,
 				$iboxes_media,
-				$title,
+				$title_bottom,
 				$text,
 				$link_closing
 			);
