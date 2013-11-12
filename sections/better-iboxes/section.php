@@ -87,7 +87,7 @@ class BetterIBoxes extends PageLinesSection {
 				$media_bg = '';
 				$media_html = '';
 
-				$border_radius = (pl_array_get( 'border_radius', $better_ibox)) ? sprintf('border-radius: %s;', pl_array_get( 'border_radius', $better_ibox)) : 'border-radius: 50%;';
+				$border_radius = (pl_array_get( 'border_radius', $better_ibox)) ? sprintf('border-radius: %s; border-top-left-radius: %s; border-top-right-radius: %s; border-bottom-left-radius: %s; border-bottom-right-radius: %s;', pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox)) : 'border-radius: 50%; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;';
 				$font_size = (pl_array_get( 'font_size', $better_ibox)) ? sprintf('font-size: %s;', pl_array_get( 'font_size', $better_ibox)) : 'font-size: 40px;';
 				$dimensions = (pl_array_get( 'dimensions', $better_ibox)) ? sprintf('width: %s; height:%s;', pl_array_get( 'dimensions', $better_ibox), pl_array_get( 'animations', $better_ibox)) : 'width:90px; height: 90px;';
 
