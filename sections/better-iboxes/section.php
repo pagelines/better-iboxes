@@ -69,7 +69,8 @@ class BetterIBoxes extends PageLinesSection {
 
 				// LINK
 				$link = pl_array_get( 'link', $better_ibox);
-				$link_opening = ($link) ? sprintf('<a href="%s">', $link ) : '';
+				$link_new_window = ( pl_array_get( 'link_new_window', $better_ibox) ) ? 'target="_blank"' :'';
+				$link_opening = ($link) ? sprintf('<a href="%s" %s >', $link, $link_new_window) : '';
 				$link_closing = ($link) ? sprintf('</a>', $link ) : '';
 
 				$hover = ( pl_array_get( 'hover', $better_ibox) ) ? '': 'hover';
@@ -89,7 +90,7 @@ class BetterIBoxes extends PageLinesSection {
 
 				$border_radius = (pl_array_get( 'border_radius', $better_ibox)) ? sprintf('border-radius: %s; border-top-left-radius: %s; border-top-right-radius: %s; border-bottom-left-radius: %s; border-bottom-right-radius: %s;', pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox)) : 'border-radius: 50%; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;';
 				$font_size = (pl_array_get( 'font_size', $better_ibox)) ? sprintf('font-size: %s;', pl_array_get( 'font_size', $better_ibox)) : 'font-size: 40px;';
-				$dimensions = (pl_array_get( 'dimensions', $better_ibox)) ? sprintf('width: %s; height:%s;', pl_array_get( 'dimensions', $better_ibox), pl_array_get( 'animations', $better_ibox)) : 'width:90px; height: 90px;';
+				$dimensions = (pl_array_get( 'dimensions', $better_ibox)) ? sprintf('width: %s; height:%s;', pl_array_get( 'dimensions', $better_ibox), pl_array_get( 'dimensions', $better_ibox)) : 'width:90px; height: 90px;';
 
 				if( $media_type == 'icon' ){
 					$media = pl_array_get( 'icon', $better_ibox) ? pl_array_get( 'icon', $better_ibox) : false;
@@ -167,7 +168,7 @@ class BetterIBoxes extends PageLinesSection {
 
 				$width += $cols;
 
-				if($width >= 12 || $i == $boxes){
+				if($width >= 12 || $count == $boxes){
 					$width = 0;
 					$output .= '</div>';
 				}
@@ -330,6 +331,16 @@ class BetterIBoxes extends PageLinesSection {
 					'key'		=> 'link',
 					'label'		=> __( 'Better iBoxes Link (Optional). Remember "http://"', 'better-iboxes' ),
 					'type'		=> 'text'
+				),
+				array(
+					'key'			=> 'link_new_window',
+					'label'			=> 'Open link in new window?',
+					'type' 			=> 'select',
+					'opts'		=> array(
+						true	 	=> array( 'name' => __( 'Yes', 'better-iboxes' ) ),
+						false		=> array( 'name' => __( 'No', 'better-iboxes' ) )
+					),
+					'default'		=> false,
 				),
 				array(
 					'key'		=> 'border_radius',

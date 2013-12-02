@@ -69,7 +69,8 @@ class AH_BetterIboxes_Plugin_Updater{
 			if ( is_admin() ) {
 
 				/* filter site transient "update_plugins" */
-				add_filter( 'pre_set_site_transient_update_plugins', array( &$this, 'transient_update_plugins' ) );
+				add_filter( 'pre_set_site_transient_update_plugins', array( &$this, 'transient_update_plugins' ), 9999 );
+				add_filter( 'site_transient_update_plugins', array( &$this, 'transient_update_plugins' ), 9999 );
 
 				/* filter plugins api */
 				add_filter( 'plugins_api_result', array( &$this, 'plugins_api_result' ), 10, 3 );
