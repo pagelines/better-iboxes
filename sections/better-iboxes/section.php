@@ -76,10 +76,12 @@ class BetterIBoxes extends PageLinesSection {
 				$hover = ( pl_array_get( 'hover', $better_ibox) ) ? '': 'hover';
 				$contrast = ( pl_array_get( 'contrast', $better_ibox) ) ? '': 'pl-contrast';
 
-				if( pl_array_get( 'animations', $better_ibox) == 0 ) {
-					$animations = '';
+				$animations = ( pl_array_get( 'animations', $better_ibox) ) ? pl_array_get( 'animations', $better_ibox) : '';
+
+				if( $animations ) {
+					$animation = '';
 				} else {
-					$animations = pl_array_get( 'animation', $better_ibox);
+					$animation = pl_array_get( 'animation', $better_ibox);
 				}
 
 				$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
@@ -128,7 +130,7 @@ class BetterIBoxes extends PageLinesSection {
 							</span>
 						</div>',
 						$media_class,
-						$animations,
+						$animation,
 						$media_bg,
 						$border_radius,
 						$dimensions,
@@ -191,11 +193,15 @@ class BetterIBoxes extends PageLinesSection {
 
 			jQuery(document).ready(function() {
 
+				jQuery('.media-type-image').each(function() {
+				    jQuery(this).height(jQuery(this).width());
+				});
+
 				jQuery(window).resize(function(){
 				    jQuery('.media-type-image').each(function() {
-				        jQuery(this).height(jQuery(this).width());
-				    });
-				}).resize();
+				    	jQuery(this).height(jQuery(this).width());
+					});
+				});
 			});
 			</script>
 		<?php
