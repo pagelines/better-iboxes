@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) || class_exists( 'AH_BetterIboxes_Plugin_Updater' ) 
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * @version 0.1.3
+ * @version 0.1.4
  * @author David Chandra Purnama <david@shellcreeper.com>
  * @link http://autohosted.com/
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License

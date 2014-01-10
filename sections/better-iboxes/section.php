@@ -8,7 +8,6 @@
 	Class Name: BetterIBoxes
 	Workswith: templates, main
 	Filter: component
-	Loading: active
 */
 
 
@@ -82,6 +81,21 @@ class BetterIBoxes extends PageLinesSection {
 					$animation = '';
 				} else {
 					$animation = pl_array_get( 'animation', $better_ibox);
+					if ($animation == 'pl-appear') {
+						$animation = 'pl-animation pl-appear';
+					} elseif ($animation == 'pla-fade') {
+						$animation = 'pl-animation pla-fade';
+					} elseif ($animation == 'pla-from-left') {
+						$animation = 'pl-animation pla-from-left';
+					} elseif ($animation == 'pla-from-right') {
+						$animation = 'pl-animation pla-from-right';
+					} elseif ($animation == 'pla-from-top') {
+						$animation = 'pl-animation pla-from-top';
+					} elseif ($animation == 'pla-bottom') {
+						$animation = 'pl-animation pla-bottom';
+					} elseif ($animation == 'pla-scale') {
+						$animation = 'pl-animation pla-scale';
+					}
 				}
 
 				$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
@@ -92,7 +106,7 @@ class BetterIBoxes extends PageLinesSection {
 
 				$border_radius = (pl_array_get( 'border_radius', $better_ibox)) ? sprintf('border-radius: %s; border-top-left-radius: %s; border-top-right-radius: %s; border-bottom-left-radius: %s; border-bottom-right-radius: %s;', pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox), pl_array_get( 'border_radius', $better_ibox)) : 'border-radius: 50%; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;';
 				$font_size = (pl_array_get( 'font_size', $better_ibox)) ? sprintf('font-size: %s;', pl_array_get( 'font_size', $better_ibox)) : 'font-size: 40px;';
-				$dimensions = (pl_array_get( 'dimensions', $better_ibox)) ? sprintf('width: %s; height:%s;', pl_array_get( 'dimensions', $better_ibox), pl_array_get( 'dimensions', $better_ibox)) : 'width:90px; height: 90px;';
+				$dimensions = (pl_array_get( 'dimensions', $better_ibox)) ? sprintf('width: %s; height: %s;', pl_array_get( 'dimensions', $better_ibox), pl_array_get( 'dimensions', $better_ibox)) : 'width: 90px; height: 90px;';
 
 				if( $media_type == 'icon' ){
 					$media = pl_array_get( 'icon', $better_ibox) ? pl_array_get( 'icon', $better_ibox) : false;
@@ -156,7 +170,6 @@ class BetterIBoxes extends PageLinesSection {
 							</div>
 						%s
 					</div>',
-
 					$custom_class,
 					$cols,
 					$format_class,
